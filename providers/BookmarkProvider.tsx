@@ -244,13 +244,13 @@ export const [BookmarkProvider, useBookmarks] = createContextHook(() => {
   }, [bookmarks, folders]);
 
   const toggleFavorite = useCallback((bookmarkId: string) => {
-    // Optimistic update for immediate UI response
     setBookmarks(prevBookmarks => {
       const updatedBookmarks = prevBookmarks.map((b) =>
         b.id === bookmarkId ? { ...b, favorite: !b.favorite } : b
       );
-      // Save data asynchronously without blocking UI
-      saveData(updatedBookmarks, folders).catch(console.error);
+      requestAnimationFrame(() => {
+        saveData(updatedBookmarks, folders).catch(console.error);
+      });
       return updatedBookmarks;
     });
   }, [folders]);
@@ -551,7 +551,10 @@ export const [BookmarkProvider, useBookmarks] = createContextHook(() => {
   }, []);
 
   useEffect(() => {
-    setFolders(prev => sortFolders(prev));
+    const timer = setTimeout(() => {
+      setFolders(prev => sortFolders(prev));
+    }, 0);
+    return () => clearTimeout(timer);
   }, [sortFolders]);
 
   return useMemo(() => ({

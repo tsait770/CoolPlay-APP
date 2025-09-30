@@ -179,108 +179,65 @@ export default function RootLayout() {
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
 
   useEffect(() => {
-    const initTimer = setTimeout(() => {
-      setIsInitialized(true);
-    }, 100);
-
-    const clearCorruptedStorage = async () => {
+    const initApp = async () => {
       try {
-        console.log('Starting storage cleanup...');
-        const allKeys = await AsyncStorage.getAllKeys();
-        const corruptedKeys: string[] = [];
-
-        for (const key of allKeys) {
+        setIsInitialized(true);
+        
+        requestAnimationFrame(async () => {
           try {
-            const data = await AsyncStorage.getItem(key);
-            if (data && typeof data === 'string' && data.length > 0) {
-              const cleaned = data.trim();
-              if (
-                cleaned.includes('object Object') ||
-                cleaned.includes('undefined') ||
-                cleaned.includes('NaN') ||
-                cleaned.match(/^[a-zA-Z]/) ||
-                (!cleaned.includes('{') && !cleaned.includes('[') && cleaned.length > 10)
-              ) {
-                console.log(`Found corrupted data for key ${key}:`, cleaned.substring(0, 50));
-                corruptedKeys.push(key);
-              } else {
-                try {
+            const allKeys = await AsyncStorage.getAllKeys();
+            const corruptedKeys: string[] = [];
+
+            const checkPromises = allKeys.map(async (key) => {
+              try {
+                const data = await AsyncStorage.getItem(key);
+                if (data && typeof data === 'string' && data.length > 0) {
+                  const cleaned = data.trim();
                   if (
-                    (cleaned.startsWith('{') && cleaned.endsWith('}')) ||
-                    (cleaned.startsWith('[') && cleaned.endsWith(']'))
+                    cleaned.includes('object Object') ||
+                    cleaned.includes('undefined') ||
+                    cleaned.includes('NaN') ||
+                    (!cleaned.startsWith('{') && !cleaned.startsWith('[') && cleaned.length > 10)
                   ) {
-                    JSON.parse(cleaned);
+                    return key;
                   }
-                } catch (parseError) {
-                  console.log(`JSON parse error for key ${key}:`, parseError);
-                  console.log('Invalid data:', cleaned.substring(0, 50));
-                  corruptedKeys.push(key);
+                  if ((cleaned.startsWith('{') || cleaned.startsWith('[')) && cleaned.length < 1000000) {
+                    try {
+                      JSON.parse(cleaned);
+                    } catch {
+                      return key;
+                    }
+                  }
                 }
+              } catch {
+                return key;
               }
+              return null;
+            });
+
+            const results = await Promise.all(checkPromises);
+            const keysToRemove = results.filter((k): k is string => k !== null);
+            
+            if (keysToRemove.length > 0) {
+              await AsyncStorage.multiRemove(keysToRemove);
             }
           } catch (error) {
-            console.error(`Error checking key ${key}:`, error);
-            corruptedKeys.push(key);
+            console.error('Storage cleanup error:', error);
           }
-        }
-
-        if (corruptedKeys.length > 0) {
-          console.log('Clearing corrupted storage keys on startup:', corruptedKeys);
-          await AsyncStorage.multiRemove(corruptedKeys);
-        } else {
-          console.log('No corrupted storage keys found');
-        }
+        });
+        
+        await SplashScreen.hideAsync();
       } catch (error) {
-        console.error('Failed to clear corrupted storage on startup:', error);
+        console.error('App init error:', error);
+        await SplashScreen.hideAsync();
       }
     };
 
-    try {
-      console.log('Testing JSON imports...');
-      import('@/constants/voiceCommands.json')
-        .then((testVoiceCommands) => {
-          console.log(
-            'Voice commands loaded:',
-            (testVoiceCommands?.default as { commands?: unknown[] } | undefined)?.commands?.length ??
-              (testVoiceCommands as unknown as { commands?: unknown[] })?.commands?.length ?? 0
-          );
-        })
-        .catch((error) => {
-          console.error('Voice commands import error:', error);
-        });
-
-      import('@/constants/voiceIntents.json')
-        .then((testVoiceIntents) => {
-          const length = Array.isArray(testVoiceIntents?.default)
-            ? (testVoiceIntents.default as unknown[]).length
-            : Array.isArray(testVoiceIntents)
-            ? (testVoiceIntents as unknown[]).length
-            : 0;
-          console.log('Voice intents loaded:', length);
-        })
-        .catch((error) => {
-          console.error('Voice intents import error:', error);
-        });
-    } catch (jsonImportError) {
-      console.error('JSON import error:', jsonImportError);
-    }
-
-    clearCorruptedStorage()
-      .then(() => SplashScreen.hideAsync())
-      .catch((error) => {
-        console.error('Failed to clear corrupted storage:', error);
-        SplashScreen.hideAsync();
-      });
-
-    return () => clearTimeout(initTimer);
+    initApp();
   }, []);
 
   if (!isInitialized) {
-    return (
-      <View style={styles.loadingContainer} testID="app-loading">
-        <Text style={styles.loadingText}>Loading...</Text>
-      </View>
-    );
+    return null;
   }
 
   return (
