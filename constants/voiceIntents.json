@@ -1,0 +1,427 @@
+[
+  {
+    "intent": "PlayVideoIntent",
+    "utterances": {
+      "en": ["play", "start playing", "resume"],
+      "zh-TW": ["播放", "開始播放", "繼續播放", "繼續", "開始"],
+      "zh-CN": ["播放", "开始播放", "继续播放", "继续", "开始"],
+      "es": ["reproducir", "empezar video", "continuar"],
+      "pt-BR": ["reproduzir", "tocar vídeo", "continuar"],
+      "pt": ["reproduzir", "iniciar vídeo", "continuar"],
+      "de": ["abspielen", "video starten", "fortsetzen"],
+      "fr": ["lire", "démarrer la vidéo", "reprendre"],
+      "ru": ["воспроизвести", "запустить видео", "продолжить"],
+      "ar": ["تشغيل", "ابدأ الفيديو", "استئناف"],
+      "ja": ["再生", "ビデオを開始", "続けて再生"],
+      "ko": ["재생", "비디오 시작", "계속 재생"]
+    }
+  },
+  {
+    "intent": "PauseVideoIntent",
+    "utterances": {
+      "en": ["pause", "stop playing temporarily"],
+      "zh-TW": ["暫停", "先停一下", "停下", "停"],
+      "zh-CN": ["暂停", "先停一下", "停下", "停"],
+      "es": ["pausar", "detener momentáneamente"],
+      "pt-BR": ["pausar", "parar temporariamente"],
+      "pt": ["pausar", "interromper"],
+      "de": ["pausieren", "kurz stoppen"],
+      "fr": ["pause", "arrêter temporairement"],
+      "ru": ["пауза", "приостановить"],
+      "ar": ["إيقاف مؤقت", "توقف الآن"],
+      "ja": ["一時停止", "停止する"],
+      "ko": ["일시정지", "잠시 멈춤"]
+    }
+  },
+  {
+    "intent": "StopVideoIntent",
+    "utterances": {
+      "en": ["stop", "end video"],
+      "zh-TW": ["停止", "結束影片"],
+      "zh-CN": ["停止", "结束视频"],
+      "es": ["detener", "terminar video"],
+      "pt-BR": ["parar", "encerrar vídeo"],
+      "pt": ["parar", "terminar vídeo"],
+      "de": ["stopp", "video beenden"],
+      "fr": ["arrêter", "terminer la vidéo"],
+      "ru": ["остановить", "закончить видео"],
+      "ar": ["إيقاف", "إنهاء الفيديو"],
+      "ja": ["停止", "終了する"],
+      "ko": ["정지", "비디오 끝내기"]
+    }
+  },
+  {
+    "intent": "NextVideoIntent",
+    "utterances": {
+      "en": ["next", "next video"],
+      "zh-TW": ["下一個", "下一部影片", "下一支"],
+      "zh-CN": ["下一个", "下一个视频", "下支"],
+      "es": ["siguiente", "siguiente video"],
+      "pt-BR": ["próximo", "próximo vídeo"],
+      "pt": ["seguinte", "próximo vídeo"],
+      "de": ["nächstes", "nächstes video"],
+      "fr": ["suivant", "vidéo suivante"],
+      "ru": ["следующее", "следующее видео"],
+      "ar": ["التالي", "الفيديو التالي"],
+      "ja": ["次へ", "次の動画"],
+      "ko": ["다음", "다음 영상"]
+    }
+  },
+  {
+    "intent": "PreviousVideoIntent",
+    "utterances": {
+      "en": ["previous", "last video"],
+      "zh-TW": ["上一個", "上一部影片", "上一支"],
+      "zh-CN": ["上一个", "上一个视频", "上一支"],
+      "es": ["anterior", "video anterior"],
+      "pt-BR": ["anterior", "vídeo anterior"],
+      "pt": ["anterior", "último vídeo"],
+      "de": ["vorheriges", "letztes video"],
+      "fr": ["précédent", "vidéo précédente"],
+      "ru": ["предыдущее", "предыдущее видео"],
+      "ar": ["السابق", "الفيديو السابق"],
+      "ja": ["前へ", "前の動画"],
+      "ko": ["이전", "이전 영상"]
+    }
+  },
+  {
+    "intent": "ReplayVideoIntent",
+    "utterances": {
+      "en": ["replay", "play again"],
+      "zh-TW": ["重播", "再播一次", "從頭開始"],
+      "zh-CN": ["重播", "再播一次", "从头开始"],
+      "es": ["repetir", "reproducir de nuevo"],
+      "pt-BR": ["repetir", "tocar de novo"],
+      "pt": ["repetir", "reproduzir novamente"],
+      "de": ["wiederholen", "nochmals abspielen"],
+      "fr": ["rejouer", "lire à nouveau"],
+      "ru": ["повторить", "сыграть снова"],
+      "ar": ["إعادة", "تشغيل مرة أخرى"],
+      "ja": ["リプレイ", "もう一度再生"],
+      "ko": ["다시 재생", "재생 반복"]
+    }
+  },
+  {
+    "intent": "Forward10Intent",
+    "utterances": {
+      "en": ["forward 10 seconds", "skip 10 seconds"],
+      "zh-TW": ["快轉10秒", "往前10秒"],
+      "zh-CN": ["快进10秒", "前进10秒"],
+      "es": ["adelantar 10 segundos"],
+      "pt-BR": ["avançar 10 segundos"],
+      "pt": ["adiantar 10 segundos"],
+      "de": ["10 sekunden vorspulen"],
+      "fr": ["avancer 10 secondes"],
+      "ru": ["перемотать 10 секунд"],
+      "ar": ["تقديم 10 ثوان"],
+      "ja": ["10秒早送り"],
+      "ko": ["10초 앞으로"]
+    }
+  },
+  {
+    "intent": "Forward20Intent",
+    "utterances": {
+      "en": ["forward 20 seconds", "skip 20 seconds"],
+      "zh-TW": ["快轉20秒", "往前20秒"],
+      "zh-CN": ["快进20秒", "前进20秒"],
+      "es": ["adelantar 20 segundos"],
+      "pt-BR": ["avançar 20 segundos"],
+      "pt": ["adiantar 20 segundos"],
+      "de": ["20 sekunden vorspulen"],
+      "fr": ["avancer 20 secondes"],
+      "ru": ["перемотать 20 секунд"],
+      "ar": ["تقديم 20 ثانية"],
+      "ja": ["20秒早送り"],
+      "ko": ["20초 앞으로"]
+    }
+  },
+  {
+    "intent": "Forward30Intent",
+    "utterances": {
+      "en": ["forward 30 seconds", "skip 30 seconds"],
+      "zh-TW": ["快轉30秒", "往前30秒"],
+      "zh-CN": ["快进30秒", "前进30秒"],
+      "es": ["adelantar 30 segundos"],
+      "pt-BR": ["avançar 30 segundos"],
+      "pt": ["adiantar 30 segundos"],
+      "de": ["30 sekunden vorspulen"],
+      "fr": ["avancer 30 secondes"],
+      "ru": ["перемотать 30 секунд"],
+      "ar": ["تقديم 30 ثانية"],
+      "ja": ["30秒早送り"],
+      "ko": ["30초 앞으로"]
+    }
+  },
+  {
+    "intent": "Rewind10Intent",
+    "utterances": {
+      "en": ["rewind 10 seconds", "back 10 seconds"],
+      "zh-TW": ["倒退10秒", "回到10秒前"],
+      "zh-CN": ["后退10秒", "回到10秒前"],
+      "es": ["retroceder 10 segundos"],
+      "pt-BR": ["retroceder 10 segundos"],
+      "pt": ["voltar 10 segundos"],
+      "de": ["10 sekunden zurück"],
+      "fr": ["reculer 10 secondes"],
+      "ru": ["назад 10 секунд"],
+      "ar": ["إرجاع 10 ثوان"],
+      "ja": ["10秒戻る"],
+      "ko": ["10초 뒤로"]
+    }
+  },
+  {
+    "intent": "Rewind20Intent",
+    "utterances": {
+      "en": ["rewind 20 seconds", "back 20 seconds"],
+      "zh-TW": ["倒退20秒", "回到20秒前"],
+      "zh-CN": ["后退20秒", "回到20秒前"],
+      "es": ["retroceder 20 segundos"],
+      "pt-BR": ["retroceder 20 segundos"],
+      "pt": ["voltar 20 segundos"],
+      "de": ["20 sekunden zurück"],
+      "fr": ["reculer 20 secondes"],
+      "ru": ["назад 20 секунд"],
+      "ar": ["إرجاع 20 ثانية"],
+      "ja": ["20秒戻る"],
+      "ko": ["20초 뒤로"]
+    }
+  },
+  {
+    "intent": "Rewind30Intent",
+    "utterances": {
+      "en": ["rewind 30 seconds", "back 30 seconds"],
+      "zh-TW": ["倒退30秒", "回到30秒前"],
+      "zh-CN": ["后退30秒", "回到30秒前"],
+      "es": ["retroceder 30 segundos"],
+      "pt-BR": ["retroceder 30 segundos"],
+      "pt": ["voltar 30 segundos"],
+      "de": ["30 sekunden zurück"],
+      "fr": ["reculer 30 secondes"],
+      "ru": ["назад 30 секунд"],
+      "ar": ["إرجاع 30 ثانية"],
+      "ja": ["30秒戻る"],
+      "ko": ["30초 뒤로"]
+    }
+  },
+  {
+    "intent": "VolumeMaxIntent",
+    "utterances": {
+      "en": ["volume max", "max volume", "maximum volume"],
+      "zh-TW": ["音量最大", "最大音量", "最高音"],
+      "zh-CN": ["音量最大", "最大音量", "最高音"],
+      "es": ["volumen máximo", "volumen al máximo"],
+      "pt-BR": ["volume máximo", "volume no máximo"],
+      "pt": ["volume máximo", "volume no máximo"],
+      "de": ["lautsärke maximal", "maximale lautstärke"],
+      "fr": ["volume maximal", "volume au maximum"],
+      "ru": ["максимальная громкость", "громкость на максимум"],
+      "ar": ["أقصى حجم", "الحجم الأقصى"],
+      "ja": ["最大音量", "音量最大"],
+      "ko": ["볼륨 최대", "최대 볼륨"]
+    }
+  },
+  {
+    "intent": "VolumeHalfIntent",
+    "utterances": {
+      "en": ["half volume", "volume 50%"],
+      "zh-TW": ["音量一半", "音量50%"],
+      "zh-CN": ["音量一半", "音量50%"],
+      "es": ["volumen a la mitad", "volumen 50%"],
+      "pt-BR": ["volume pela metade", "volume 50%"],
+      "pt": ["volume a meio", "volume 50%"],
+      "de": ["halbe lautstärke", "lautstärke 50%"],
+      "fr": ["volume à moitié", "volume 50%"],
+      "ru": ["громкость наполовину", "громкость 50%"],
+      "ar": ["نصف الصوت", "صوت 50%"],
+      "ja": ["音量半分", "音量50%"],
+      "ko": ["볼륨 절반", "볼륨 50%"]
+    }
+  },
+  {
+    "intent": "MuteIntent",
+    "utterances": {
+      "en": ["mute", "mute volume"],
+      "zh-TW": ["靜音", "關閉聲音", "關聲音"],
+      "zh-CN": ["静音", "关闭声音", "关声音"],
+      "es": ["silencio", "silenciar"],
+      "pt-BR": ["mudo", "silenciar"],
+      "pt": ["mudo", "silenciar"],
+      "de": ["stumm", "stummschalten"],
+      "fr": ["muet", "couper le son"],
+      "ru": ["выключить звук", "без звука"],
+      "ar": ["كتم الصوت", "صامت"],
+      "ja": ["ミュート", "消音"],
+      "ko": ["음소거", "소리 끄기"]
+    }
+  },
+  {
+    "intent": "UnmuteIntent",
+    "utterances": {
+      "en": ["unmute", "unmute volume"],
+      "zh-TW": ["解除靜音", "開啟聲音", "開聲音"],
+      "zh-CN": ["解除静音", "开启声音", "开声音"],
+      "es": ["activar sonido", "quitar silencio"],
+      "pt-BR": ["desmutar", "ativar som"],
+      "pt": ["desmutar", "ativar som"],
+      "de": ["Ton an", "Stummschaltung aufheben"],
+      "fr": ["réactiver le son", "activer le son"],
+      "ru": ["включить звук", "убрать беззвучный режим"],
+      "ar": ["إلغاء كتم الصوت", "تشغيل الصوت"],
+      "ja": ["ミュート解除", "音声オン"],
+      "ko": ["음소거 해제", "소리 켜기"]
+    }
+  },
+  {
+    "intent": "VolumeUpIntent",
+    "utterances": {
+      "en": ["volume up", "increase volume", "louder"],
+      "zh-TW": ["音量調高", "提高音量", "大聲一點", "調大", "加大"],
+      "zh-CN": ["调高音量", "提高音量", "大声一点", "调大", "加大"],
+      "es": ["subir volumen", "aumentar volumen", "más alto"],
+      "pt-BR": ["aumentar volume", "subir volume", "mais alto"],
+      "pt": ["aumentar volume", "subir volume", "mais alto"],
+      "de": ["Lautstärke erhöhen", "lauter", "Lautstärke hoch"],
+      "fr": ["augmenter le volume", "plus fort", "monter le son"],
+      "ru": ["увеличить громкость", "громче", "прибавить звук"],
+      "ar": ["رفع الصوت", "زيادة الصوت", "أعلى"],
+      "ja": ["音量アップ", "音量を上げる", "大きくする"],
+      "ko": ["볼륨 올리기", "소리 크게", "볼륨 업"]
+    }
+  },
+  {
+    "intent": "VolumeDownIntent",
+    "utterances": {
+      "en": ["volume down", "decrease volume", "quieter"],
+      "zh-TW": ["音量調低", "降低音量", "小聲一點", "調小", "減小"],
+      "zh-CN": ["调低音量", "降低音量", "小声一点", "调小", "减小"],
+      "es": ["bajar volumen", "disminuir volumen", "más bajo"],
+      "pt-BR": ["diminuir volume", "baixar volume", "mais baixo"],
+      "pt": ["diminuir volume", "baixar volume", "mais baixo"],
+      "de": ["Lautstärke verringern", "leiser", "Lautstärke runter"],
+      "fr": ["baisser le volume", "moins fort", "baisser le son"],
+      "ru": ["убавить громкость", "тише", "убавить звук"],
+      "ar": ["خفض الصوت", "تقليل الصوت", "أخفض"],
+      "ja": ["音量ダウン", "音量を下げる", "小さくする"],
+      "ko": ["볼륨 내리기", "소리 작게", "볼륨 다운"]
+    }
+  },
+  {
+    "intent": "EnterFullscreenIntent",
+    "utterances": {
+      "en": ["enter fullscreen", "fullscreen", "full screen"],
+      "zh-TW": ["進入全螢幕", "全螢幕", "全螢幕播放", "擴大畫面"],
+      "zh-CN": ["进入全屏", "全屏", "全屏播放", "扩大画面"],
+      "es": ["pantalla completa", "entrar pantalla completa"],
+      "pt-BR": ["tela cheia", "entrar tela cheia"],
+      "pt": ["tela cheia", "entrar tela cheia"],
+      "de": ["Vollbildmodus aktivieren", "Vollbild"],
+      "fr": ["plein écran", "activer plein écran"],
+      "ru": ["войти в полноэкранный режим", "полный экран"],
+      "ar": ["تكبير الشاشة", "ملء الشاشة"],
+      "ja": ["全画面表示", "フルスクリーン"],
+      "ko": ["전체화면", "전체화면 시작"]
+    }
+  },
+  {
+    "intent": "ExitFullscreenIntent",
+    "utterances": {
+      "en": ["exit fullscreen", "leave fullscreen"],
+      "zh-TW": ["離開全螢幕", "退出全螢幕", "縮小畫面", "回原畫面"],
+      "zh-CN": ["退出全屏", "离开全屏", "缩小画面", "回原画面"],
+      "es": ["salir de pantalla completa", "salir pantalla completa"],
+      "pt-BR": ["sair da tela cheia", "sair tela cheia"],
+      "pt": ["sair da tela cheia", "sair tela cheia"],
+      "de": ["Vollbildmodus verlassen", "Vollbild beenden"],
+      "fr": ["quitter le plein écran", "sortir plein écran"],
+      "ru": ["выйти из полноэкранного режима", "выход из полного экрана"],
+      "ar": ["الخروج من وضع ملء الشاشة", "إنهاء ملء الشاشة"],
+      "ja": ["全画面終了", "フルスクリーン解除"],
+      "ko": ["전체화면 종료", "전체화면 나가기"]
+    }
+  },
+  {
+    "intent": "SpeedHalfIntent",
+    "utterances": {
+      "en": ["0.5x speed", "half speed", "0.5 speed"],
+      "zh-TW": ["0.5 倍速", "半速", "0.5倍"],
+      "zh-CN": ["0.5 倍速", "半速"],
+      "es": ["velocidad 0.5x", "media velocidad"],
+      "pt-BR": ["velocidade 0.5x", "meia velocidade"],
+      "pt": ["velocidade 0.5x", "meia velocidade"],
+      "de": ["0,5-fache Geschwindigkeit", "halbe Geschwindigkeit"],
+      "fr": ["vitesse 0,5x", "demi-vitesse"],
+      "ru": ["скорость 0,5x", "половинная скорость"],
+      "ar": ["سرعة 0.5x", "نصف السرعة"],
+      "ja": ["0.5倍速", "半分の速度"],
+      "ko": ["0.5배속", "절반 속도"]
+    }
+  },
+  {
+    "intent": "SpeedNormalIntent",
+    "utterances": {
+      "en": ["normal speed", "1x speed", "regular speed"],
+      "zh-TW": ["正常速度", "1 倍速", "標準速度", "正常", "1倍"],
+      "zh-CN": ["正常速度", "1 倍速", "标准速度"],
+      "es": ["velocidad normal", "1x", "velocidad regular"],
+      "pt-BR": ["velocidade normal", "1x", "velocidade regular"],
+      "pt": ["velocidade normal", "1x", "velocidade regular"],
+      "de": ["normale Geschwindigkeit", "1x Geschwindigkeit", "Standardgeschwindigkeit"],
+      "fr": ["vitesse normale", "1x vitesse", "vitesse standard"],
+      "ru": ["нормальная скорость", "1x скорость", "обычная скорость"],
+      "ar": ["السرعة العادية", "1x", "السرعة القياسية"],
+      "ja": ["標準速度", "1倍速", "通常速度"],
+      "ko": ["표준 속도", "1배속", "정상 속도"]
+    }
+  },
+  {
+    "intent": "Speed125Intent",
+    "utterances": {
+      "en": ["1.25x speed", "1.25 speed"],
+      "zh-TW": ["1.25 倍速", "稍快", "1.25倍"],
+      "zh-CN": ["1.25 倍速"],
+      "es": ["velocidad 1.25x"],
+      "pt-BR": ["velocidade 1.25x"],
+      "pt": ["velocidade 1.25x"],
+      "de": ["1,25-fache Geschwindigkeit"],
+      "fr": ["vitesse 1,25x"],
+      "ru": ["скорость 1,25x"],
+      "ar": ["سرعة 1.25x"],
+      "ja": ["1.25倍速"],
+      "ko": ["1.25배속"]
+    }
+  },
+  {
+    "intent": "Speed150Intent",
+    "utterances": {
+      "en": ["1.5x speed", "1.5 speed"],
+      "zh-TW": ["1.5 倍速", "快速", "1.5倍"],
+      "zh-CN": ["1.5 倍速"],
+      "es": ["velocidad 1.5x"],
+      "pt-BR": ["velocidade 1.5x"],
+      "pt": ["velocidade 1.5x"],
+      "de": ["1,5-fache Geschwindigkeit"],
+      "fr": ["vitesse 1,5x"],
+      "ru": ["скорость 1,5x"],
+      "ar": ["سرعة 1.5x"],
+      "ja": ["1.5倍速"],
+      "ko": ["1.5배속"]
+    }
+  },
+  {
+    "intent": "Speed200Intent",
+    "utterances": {
+      "en": ["2x speed", "double speed", "2 speed"],
+      "zh-TW": ["2 倍速", "雙倍速度"],
+      "zh-CN": ["2 倍速", "双倍速度"],
+      "es": ["velocidad 2x", "doble velocidad"],
+      "pt-BR": ["velocidade 2x", "velocidade dupla"],
+      "pt": ["velocidade 2x", "velocidade dupla"],
+      "de": ["2x Geschwindigkeit", "doppelte Geschwindigkeit"],
+      "fr": ["vitesse 2x", "double vitesse"],
+      "ru": ["скорость 2x", "двойная скорость"],
+      "ar": ["سرعة 2x", "ضعف السرعة"],
+      "ja": ["2倍速", "倍速"],
+      "ko": ["2배속", "두 배 속도"]
+    }
+  }
+]
