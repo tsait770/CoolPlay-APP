@@ -67,7 +67,7 @@ export const [BookmarkProvider, useBookmarks] = createContextHook(() => {
     const timer = setTimeout(() => {
       console.log('[BookmarkProvider] Loading data...');
       loadData();
-    }, 100);
+    }, 500);
     return () => clearTimeout(timer);
   }, []);
 

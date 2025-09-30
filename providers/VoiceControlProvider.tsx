@@ -169,7 +169,7 @@ export const [VoiceControlProvider, useVoiceControl] = createContextHook(() => {
         await loadSettings();
       };
       initializeSettings();
-    }, 200);
+    }, 900);
     return () => clearTimeout(timer);
   }, [clearCorruptedData, loadSettings, storage]);
 

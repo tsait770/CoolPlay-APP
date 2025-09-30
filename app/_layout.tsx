@@ -183,8 +183,15 @@ export default function RootLayout() {
       try {
         console.log('[App] Initializing...');
         
-        await SplashScreen.hideAsync();
         setIsInitialized(true);
+        
+        setTimeout(async () => {
+          try {
+            await SplashScreen.hideAsync();
+          } catch (error) {
+            console.error('[App] Error hiding splash:', error);
+          }
+        }, 100);
         
         setTimeout(() => {
           requestAnimationFrame(async () => {
@@ -229,11 +236,17 @@ export default function RootLayout() {
               console.error('[App] Storage cleanup error:', error);
             }
           });
-        }, 2000);
+        }, 3000);
       } catch (error) {
         console.error('[App] Init error:', error);
-        await SplashScreen.hideAsync();
         setIsInitialized(true);
+        setTimeout(async () => {
+          try {
+            await SplashScreen.hideAsync();
+          } catch (e) {
+            console.error('[App] Error hiding splash on error:', e);
+          }
+        }, 100);
       }
     };
 

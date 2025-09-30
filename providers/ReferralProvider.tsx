@@ -165,7 +165,7 @@ export const [ReferralProvider, useReferral] = createContextHook<ReferralContext
     const timer = setTimeout(() => {
       console.log('[ReferralProvider] Loading user data...');
       loadUserData();
-    }, 150);
+    }, 700);
     return () => clearTimeout(timer);
   }, []);
 

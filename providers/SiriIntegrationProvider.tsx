@@ -431,7 +431,7 @@ export const [SiriIntegrationProvider, useSiriIntegration] = createContextHook((
                 } catch (startError) {
                   console.error('[SiriIntegrationProvider] Error auto-starting:', startError);
                 }
-              }, 1000);
+              }, 2000);
             }
           }
           
@@ -443,7 +443,7 @@ export const [SiriIntegrationProvider, useSiriIntegration] = createContextHook((
       };
       
       initializeVoiceControl();
-    }, 250);
+    }, 1100);
     
     return () => {
       clearTimeout(timer);

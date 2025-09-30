@@ -106,7 +106,7 @@ export const [CategoryProvider, useCategories] = createContextHook(() => {
         }
       };
       loadCategories();
-    }, 50);
+    }, 300);
     return () => clearTimeout(timer);
   }, [getItem]);
 
