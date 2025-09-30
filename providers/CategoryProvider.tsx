@@ -83,29 +83,31 @@ export const [CategoryProvider, useCategories] = createContextHook(() => {
   const [isLoading, setIsLoading] = useState(true);
   const { getItem, setItem } = useStorage();
 
-  // Load categories from storage
+  // Load categories from storage with delay
   useEffect(() => {
-    const loadCategories = async () => {
-      try {
-        const stored = await getItem(STORAGE_KEY);
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          // Merge with default categories to ensure defaults are always present
-          const mergedCategories = defaultCategories.map(defaultCat => {
-            const storedCat = parsed.find((c: Category) => c.id === defaultCat.id);
-            return storedCat ? { ...defaultCat, ...storedCat } : defaultCat;
-          });
-          // Add any custom categories
-          const customCategories = parsed.filter((c: Category) => !c.isDefault);
-          setCategories([...mergedCategories, ...customCategories]);
+    const timer = setTimeout(() => {
+      const loadCategories = async () => {
+        try {
+          console.log('[CategoryProvider] Loading categories...');
+          const stored = await getItem(STORAGE_KEY);
+          if (stored) {
+            const parsed = JSON.parse(stored);
+            const mergedCategories = defaultCategories.map(defaultCat => {
+              const storedCat = parsed.find((c: Category) => c.id === defaultCat.id);
+              return storedCat ? { ...defaultCat, ...storedCat } : defaultCat;
+            });
+            const customCategories = parsed.filter((c: Category) => !c.isDefault);
+            setCategories([...mergedCategories, ...customCategories]);
+          }
+        } catch (error) {
+          console.error('[CategoryProvider] Error loading categories:', error);
+        } finally {
+          setIsLoading(false);
         }
-      } catch (error) {
-        console.error('Error loading categories:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    loadCategories();
+      };
+      loadCategories();
+    }, 50);
+    return () => clearTimeout(timer);
   }, [getItem]);
 
   // Save categories to storage

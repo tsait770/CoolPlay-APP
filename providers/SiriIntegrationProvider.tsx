@@ -414,53 +414,51 @@ export const [SiriIntegrationProvider, useSiriIntegration] = createContextHook((
     };
   }, [isListening, startListening]);
 
-  // Initialize permissions and check previous state
+  // Initialize permissions and check previous state with delay
   useEffect(() => {
-    const initializeVoiceControl = async () => {
-      try {
-        const permissionGranted = await getItem('voicePermissionGranted');
-        if (permissionGranted === 'true') {
-          setHasPermission(true);
-          // Auto-start listening if previously enabled
-          const autoStart = await getItem('voiceControlAutoStart');
-          if (autoStart === 'true') {
-            // Will start after component mounts
-            setTimeout(() => {
-              try {
-                startListening();
-              } catch (startError) {
-                console.error('Error auto-starting voice control:', startError);
-              }
-            }, 1000);
+    const timer = setTimeout(() => {
+      const initializeVoiceControl = async () => {
+        try {
+          console.log('[SiriIntegrationProvider] Initializing...');
+          const permissionGranted = await getItem('voicePermissionGranted');
+          if (permissionGranted === 'true') {
+            setHasPermission(true);
+            const autoStart = await getItem('voiceControlAutoStart');
+            if (autoStart === 'true') {
+              setTimeout(() => {
+                try {
+                  startListening();
+                } catch (startError) {
+                  console.error('[SiriIntegrationProvider] Error auto-starting:', startError);
+                }
+              }, 1000);
+            }
           }
-        } else {
-          requestPermission();
+          
+          const siriEnabled = await getItem('siriShortcutsEnabled');
+          setIsSiriEnabled(siriEnabled === 'true');
+        } catch (error) {
+          console.error('[SiriIntegrationProvider] Error initializing:', error);
         }
-        
-        // Check if Siri shortcuts are enabled
-        const siriEnabled = await getItem('siriShortcutsEnabled');
-        setIsSiriEnabled(siriEnabled === 'true');
-      } catch (error) {
-        console.error('Error initializing voice control:', error);
-      }
-    };
+      };
+      
+      initializeVoiceControl();
+    }, 250);
     
-    initializeVoiceControl();
-    
-    // Cleanup function to prevent memory leaks
     return () => {
+      clearTimeout(timer);
       if (recognitionRef.current) {
         try {
           if (typeof recognitionRef.current.stop === 'function') {
             recognitionRef.current.stop();
           }
         } catch (err) {
-          console.warn('Error stopping recognition on cleanup:', err);
+          console.warn('[SiriIntegrationProvider] Error stopping recognition:', err);
         }
         recognitionRef.current = null;
       }
     };
-  }, [getItem, requestPermission, startListening]);
+  }, [getItem, startListening]);
 
   // Cleanup on unmount
   useEffect(() => {

@@ -181,55 +181,59 @@ export default function RootLayout() {
   useEffect(() => {
     const initApp = async () => {
       try {
+        console.log('[App] Initializing...');
+        
+        await SplashScreen.hideAsync();
         setIsInitialized(true);
         
-        requestAnimationFrame(async () => {
-          try {
-            const allKeys = await AsyncStorage.getAllKeys();
-            const corruptedKeys: string[] = [];
+        setTimeout(() => {
+          requestAnimationFrame(async () => {
+            try {
+              console.log('[App] Background storage cleanup started');
+              const allKeys = await AsyncStorage.getAllKeys();
+              const corruptedKeys: string[] = [];
 
-            const checkPromises = allKeys.map(async (key) => {
-              try {
-                const data = await AsyncStorage.getItem(key);
-                if (data && typeof data === 'string' && data.length > 0) {
-                  const cleaned = data.trim();
-                  if (
-                    cleaned.includes('object Object') ||
-                    cleaned.includes('undefined') ||
-                    cleaned.includes('NaN') ||
-                    (!cleaned.startsWith('{') && !cleaned.startsWith('[') && cleaned.length > 10)
-                  ) {
-                    return key;
-                  }
-                  if ((cleaned.startsWith('{') || cleaned.startsWith('[')) && cleaned.length < 1000000) {
-                    try {
-                      JSON.parse(cleaned);
-                    } catch {
-                      return key;
+              for (const key of allKeys) {
+                try {
+                  const data = await AsyncStorage.getItem(key);
+                  if (data && typeof data === 'string' && data.length > 0) {
+                    const cleaned = data.trim();
+                    if (
+                      cleaned.includes('object Object') ||
+                      cleaned.includes('undefined') ||
+                      cleaned.includes('NaN') ||
+                      (!cleaned.startsWith('{') && !cleaned.startsWith('[') && cleaned.length > 10)
+                    ) {
+                      corruptedKeys.push(key);
+                      continue;
+                    }
+                    if ((cleaned.startsWith('{') || cleaned.startsWith('[')) && cleaned.length < 1000000) {
+                      try {
+                        JSON.parse(cleaned);
+                      } catch {
+                        corruptedKeys.push(key);
+                      }
                     }
                   }
+                } catch {
+                  corruptedKeys.push(key);
                 }
-              } catch {
-                return key;
               }
-              return null;
-            });
-
-            const results = await Promise.all(checkPromises);
-            const keysToRemove = results.filter((k): k is string => k !== null);
-            
-            if (keysToRemove.length > 0) {
-              await AsyncStorage.multiRemove(keysToRemove);
+              
+              if (corruptedKeys.length > 0) {
+                console.log('[App] Removing corrupted keys:', corruptedKeys.length);
+                await AsyncStorage.multiRemove(corruptedKeys);
+              }
+              console.log('[App] Background storage cleanup completed');
+            } catch (error) {
+              console.error('[App] Storage cleanup error:', error);
             }
-          } catch (error) {
-            console.error('Storage cleanup error:', error);
-          }
-        });
-        
-        await SplashScreen.hideAsync();
+          });
+        }, 2000);
       } catch (error) {
-        console.error('App init error:', error);
+        console.error('[App] Init error:', error);
         await SplashScreen.hideAsync();
+        setIsInitialized(true);
       }
     };
 

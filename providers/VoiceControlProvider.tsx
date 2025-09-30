@@ -157,17 +157,20 @@ export const [VoiceControlProvider, useVoiceControl] = createContextHook(() => {
     }
   }, [storage]);
 
-  // Load settings from localStorage
+  // Load settings from localStorage with delay
   useEffect(() => {
-    const initializeSettings = async () => {
-      // Clear any corrupted storage data first
-      if (storage && typeof storage.clearCorruptedData === 'function') {
-        await storage.clearCorruptedData();
-      }
-      await clearCorruptedData();
-      await loadSettings();
-    };
-    initializeSettings();
+    const timer = setTimeout(() => {
+      const initializeSettings = async () => {
+        console.log('[VoiceControlProvider] Initializing settings...');
+        if (storage && typeof storage.clearCorruptedData === 'function') {
+          await storage.clearCorruptedData();
+        }
+        await clearCorruptedData();
+        await loadSettings();
+      };
+      initializeSettings();
+    }, 200);
+    return () => clearTimeout(timer);
   }, [clearCorruptedData, loadSettings, storage]);
 
 

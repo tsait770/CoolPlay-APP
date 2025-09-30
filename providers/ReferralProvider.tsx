@@ -160,9 +160,13 @@ export const [ReferralProvider, useReferral] = createContextHook<ReferralContext
 
   const [referralRecords, setReferralRecords] = useState<ReferralRecord[]>([]);
 
-  // Load data from AsyncStorage on mount
+  // Load data from AsyncStorage on mount with delay
   useEffect(() => {
-    loadUserData();
+    const timer = setTimeout(() => {
+      console.log('[ReferralProvider] Loading user data...');
+      loadUserData();
+    }, 150);
+    return () => clearTimeout(timer);
   }, []);
 
   const saveUserData = useCallback(async () => {

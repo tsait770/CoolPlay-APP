@@ -62,9 +62,13 @@ export const [BookmarkProvider, useBookmarks] = createContextHook(() => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load data from storage
+  // Load data from storage with delay to prevent blocking
   useEffect(() => {
-    loadData();
+    const timer = setTimeout(() => {
+      console.log('[BookmarkProvider] Loading data...');
+      loadData();
+    }, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   // Sync folders with categories (add/remove/link)
